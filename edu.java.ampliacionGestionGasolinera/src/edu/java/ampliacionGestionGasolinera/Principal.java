@@ -18,6 +18,7 @@ public class Principal {
 		// Scanner con la opción del usuario
 		Scanner entradaOpcion = new Scanner(System.in);
 		int opcion;
+		String entradaValor;
 		do {
 			// Mostramos el menu
 			mostrarMenu();
@@ -43,8 +44,26 @@ public class Principal {
 				// VER TODOS LOS REPOSTAJES
 				repos.todosRepostajes(listaBD);
 				break;
+			
+			case 4:
+				// LISTAR REPOSTAJE POR TIPOS
+				// Mostramos primero un mensaje de las posibilidades que hay
+				System.out.println("Introduzca \"false\" para ver repostaje Normal");
+				System.out.println("Introduzca \"true\" para ver repostaje Factura");
+				System.out.print("Opción: ");
+				entradaValor = entradaOpcion.next();
+				repos.mostrarRepostajePorTipo(listaBD, Boolean.valueOf(entradaValor));
+				break;
+			case 5:
+				// ELIMINAR REPOSTAJE
+				listaBD = repos.eliminarRepostaje(listaBD);
+				break;
+			case 6:
+				// MODIFICAR REPOSTAJE
+				listaBD = repos.modificarRepostaje(listaBD);
+				break;
 			}
-		} while (opcion != 4);
+		} while (opcion != 7);
 		
 		// Cerramos la variable Scanner
 		entradaOpcion.close();
@@ -54,7 +73,10 @@ public class Principal {
 		System.out.println("1. Repostaje Normal");
 		System.out.println("2. Repostaje Factura");
 		System.out.println("3. Ver todos los repostajes");
-		System.out.println("4. Salir");
+		System.out.println("4. Listar repostajes por tipo");
+		System.out.println("5. Eliminar repostaje");
+		System.out.println("6. Modificar repostaje");
+		System.out.println("7. Salir");
 	}
 
 }
